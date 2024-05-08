@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# author: Paolo Fagni
+
+# This script is used to deploy the optimize command in a running container.
+# The script will find the running container by name and execute the optimize command in it.
+# The container name can be provided as an argument to the script.
+# If no container name is provided the default container name pff2web will be used.
+
+# Check if docker is installed
+if ! [ -x "$(command -v docker)" ]; then
+  echo 'Error: Docker is not installed or you do not have the rights to run it.' >&2
+  exit 1
+fi
+
+
+#Check if container name is provided
+if [ -z "$1" ]
+then
+  echo "You can provide the container name as an argument to this script."
+  echo "Example: deploy-optimize my-container"
+  echo "Since no container name is provided the default container name pff2web will be used."
+  CONTAINER_NAME="pff2web"
+else
+  CONTAINER_NAME=$1
+fi
+
+# Find the SHA of the running container
+CONTAINER_SHA=$(docker ps -q -f name=$CONTAINER_NAME)
+
+# Check if container is running
+if [ -z "$CONTAINER_SHA" ]
+then
+  echo "No running container found with name: $CONTAINER_NAME"
+  exit 1
+fi
+
+# Execute a command in the running container
+# Replace 'your-command' with the command you want to execute
+docker exec -it $CONTAINER_SHA zsh -c "cd /sites/localhost/html/public; ./vendor/bin/pff d:o"
+

@@ -1,0 +1,32 @@
+services:
+  pff2web:
+    image: stonedz/docker-php-dev
+    ports:
+      - "8080:80"
+      - "4433:443"
+    links:
+      - db:db
+    volumes:
+      - ./sites/:/sites/
+      - .:/sites/localhost/html/public/ 
+
+  pff2db:
+    image: mariadb:lts
+    ports:
+      - "3307:3306"
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+
+  pff2phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8008:80"
+    links:
+      - db:mariadb
+    environment:
+      PMA_HOST: mariadb
+
+  # redis:
+  #   image: redis
+  #   ports:
+  #     - "6379:6379"
