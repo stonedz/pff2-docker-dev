@@ -1,0 +1,5 @@
+name: pff2-docker-dev
+version: "0.1"
+desc: Docker development environment for Pff2
+class: 
+

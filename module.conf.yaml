@@ -1,0 +1,3 @@
+moduleConf:
+  # The name or part of the name of the container serving the application
+  docker_container_name: web_1

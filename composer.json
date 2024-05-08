@@ -1,0 +1,33 @@
+{
+	"name": "stonedz/pff2-docker-dev",
+	"type": "pff2-module",
+	"description": "Docker helpers and configurations for PFF2",
+	"license": "MIT",
+	"keywords": [
+		"pff2", "module", "development", "docker"
+	],
+	"authors": [
+		{
+			"name": "Paolo Fagni",
+			"email": "paolo.fagni@gmail.com",
+			"role": "Developer"
+		}
+	],
+	"homepage": "https://github.com/stonedz/pff2-docker-dev",
+	"require": {
+		"stonedz/pff2-installers": "*",
+	},
+	"require-dev": {
+		"stonedz/pff2": "3.0.x-dev"
+	},
+	"autoload": {
+		"psr-4": {
+			"pff\\modules\\": "src/"
+		}
+	},
+	"config": {
+		"allow-plugins": {
+			"stonedz/pff2-installers": true
+		}
+	}
+}
