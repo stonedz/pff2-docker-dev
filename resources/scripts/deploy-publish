@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# author: Paolo Fagni
+
+# This script is used to run the doctrine validate-schema command in a running container.
+
+DIR="${BASH_SOURCE%/*}"
+if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
+. "$DIR/checks"
+
+if [ -z "$2" ]
+then
+    param=''
+else
+    param=$2
+fi
+# Execute a command in the running container
+# Replace 'your-command' with the command you want to execute
+docker exec -it $CONTAINER_SHA zsh -c "cd /sites/localhost/html/public; ./vendor/bin/pff deploy:publish $param"
+

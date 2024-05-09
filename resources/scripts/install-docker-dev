@@ -1,0 +1,70 @@
+#!/bin/bash
+
+
+green='\e[0;32m'
+GREEN='\e[1;32m'
+red='\e[0;31m'
+RED='\e[1;31m'
+blue='\e[0;34m'
+BLUE='\e[1;34m'
+cyan='\e[0;36m'
+CYAN='\e[1;36m'
+NC='\e[0m' # No Color
+
+function help() {
+    echo -e "${NC}-f    Force the update";
+}
+
+echo -e "${GREEN}========== \n${BLUE} Installing Dockerfile and compose.yml \n${GREEN}==========${NC}"
+
+# Gets the parameters
+while getopts ":f" opt; do
+    case $opt in
+        f)
+            force=true
+            echo -e "${red}Force update!"
+            ;;
+        \?)
+            echo "Invalid option: -$OPTARG" >&2
+            echo -e "\n"
+            help
+            exit
+            ;;
+    esac
+done
+
+
+# Check if the compose.yml file exists
+if [ ! -f "compose.yml" ]; then
+    echo -e "${green}compose.yml file not found!${NC}"
+    echo -e "${green}Coping compose.yml file${NC}"
+    cp vendor/stonedz/pff2-docker-dev/resources/compose.yml .
+    echo -e "${GREEN}OK!${NC}"
+    exit
+else
+    if [ "$force" = true ]; then
+        echo -e "${red}compose.yml exists, forcing update!${NC}"
+        cp vendor/stonedz/pff2-docker-dev/resources/compose.yml .
+        echo -e "${GREEN}OK!${NC}"
+    else
+        echo -e "${RED}compose.yml file already exists! use -f to force the update${NC}"
+    fi
+fi
+
+# Check if the Dockerfile exists
+if [ ! -f "Dockerfile" ]; then
+    echo -e "${red}Dockerfile file not found!${NC}"
+    echo -e "${green}Coping Dockerfile file${NC}"
+    cp vendor/stonedz/pff2-docker-dev/resources/Dockerfile .
+    echo -e "${GREEN}OK!${NC}"
+else
+    if [ "$force" = true ]; then
+        echo -e "${red}Dockerfile exists, forcing update!${NC}"
+        cp vendor/stonedz/pff2-docker-dev/resources/Dockerfile .
+        echo -e "${GREEN}OK!${NC}"
+    else
+        echo -e "${RED}Dockerfile file already exists! use -f to force the update${NC}"
+    fi
+fi
+
+echo -e "${GREEN}========== \n${BLUE} Done! \n${GREEN}==========${NC}"

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# author: Paolo Fagni
+
+# This script is used to run the pff deploy:create command in a running container.
+
+DIR="${BASH_SOURCE%/*}"
+if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
+. "$DIR/checks"
+
+
+if [ -z "$2" ]
+then
+  echo -e "${RED}You need to provide a name for the profile${NC}"
+  echo -e "${RED}deploy-create <container-name> <deploy-profile-name>${NC}"
+  exit 1
+fi
+
+# Execute a command in the running container
+# Replace 'your-command' with the command you want to execute
+docker exec -it $CONTAINER_SHA zsh -c "cd /sites/localhost/html/public; ./vendor/bin/pff deploy:create $2"
+
