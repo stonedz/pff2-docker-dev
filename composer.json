@@ -1,6 +1,5 @@
 {
 	"name": "stonedz/pff2-docker-dev",
-	"type": "pff2-module",
 	"description": "Docker helpers and configurations for PFF2",
 	"license": "MIT",
 	"keywords": [
@@ -15,19 +14,17 @@
 	],
 	"homepage": "https://github.com/stonedz/pff2-docker-dev",
 	"require": {
-		"stonedz/pff2-installers": "*",
 	},
 	"require-dev": {
 		"stonedz/pff2": "3.0.x-dev"
 	},
-	"autoload": {
-		"psr-4": {
-			"pff\\modules\\": "src/"
-		}
-	},
-	"config": {
-		"allow-plugins": {
-			"stonedz/pff2-installers": true
-		}
-	}
+    "bin": ["resources/scripts/checks",
+			"resources/scripts/deploy-create",
+			"resources/scripts/deploy-optimize",
+			"resources/scripts/deploy-publish",
+			"resources/scripts/dump-sql",
+			"resources/scripts/force-sql-update",
+			"resources/scripts/install-docker-dev",
+			"resources/scripts/validate-schema"
+		]
 }
