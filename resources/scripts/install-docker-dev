@@ -15,7 +15,7 @@ function help() {
     echo -e "${NC}-f    Force the update";
 }
 
-echo -e "${GREEN}========== \n${BLUE} Installing Dockerfile and compose.yml \n${GREEN}==========${NC}"
+echo -e "${GREEN}========== \n${BLUE} Installing Dockerfile and compose.yaml \n${GREEN}==========${NC}"
 
 # Gets the parameters
 while getopts ":f" opt; do
@@ -34,20 +34,20 @@ while getopts ":f" opt; do
 done
 
 
-# Check if the compose.yml file exists
-if [ ! -f "compose.yml" ]; then
-    echo -e "${green}compose.yml file not found!${NC}"
-    echo -e "${green}Coping compose.yml file${NC}"
-    cp vendor/stonedz/pff2-docker-dev/resources/compose.yml .
+# Check if the compose.yaml file exists
+if [ ! -f "compose.yaml" ]; then
+    echo -e "${green}compose.yaml file not found!${NC}"
+    echo -e "${green}Coping compose.yaml file${NC}"
+    cp vendor/stonedz/pff2-docker-dev/resources/compose.yaml .
     echo -e "${GREEN}OK!${NC}"
     exit
 else
     if [ "$force" = true ]; then
-        echo -e "${red}compose.yml exists, forcing update!${NC}"
-        cp vendor/stonedz/pff2-docker-dev/resources/compose.yml .
+        echo -e "${red}compose.yaml exists, forcing update!${NC}"
+        cp vendor/stonedz/pff2-docker-dev/resources/compose.yaml .
         echo -e "${GREEN}OK!${NC}"
     else
-        echo -e "${RED}compose.yml file already exists! use -f to force the update${NC}"
+        echo -e "${RED}compose.yaml file already exists! use -f to force the update${NC}"
     fi
 fi
 
